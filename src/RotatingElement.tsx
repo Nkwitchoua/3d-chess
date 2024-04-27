@@ -7,47 +7,27 @@ import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 
 const RotatingElement = () => {
 
-  const gltf = useLoader(GLTFLoader, "../public/models/chess/scene.gltf");
-  const test = useLoader(GLTFLoader, "../public/models/chess/figures/white_queen.gltf");
+  const queen = useLoader(GLTFLoader, "../public/models/chess/figures/white_queen.gltf");
   const king = useLoader(GLTFLoader, "../public/models/chess/figures/white_king.gltf");
     
   const box = useRef(null);
-  
-  useFrame((({ clock }) => {
-    if(box && box.current) {
-      // @ts-ignore: Object is possibly 'null'.
-      // box.current.rotation.x = clock.getElapsedTime();
-      // box.current.rotation.y = clock.getElapsedTime();
-      // box.current.rotation.z = clock.getElapsedTime();
 
-      // box.current.position.x = Math.sin(clock.getElapsedTime()  * 2);
-      // box.current.position.y = Math.cos(clock.getElapsedTime()  * 2);
-      // box.current.position.z = Math.sin(clock.getElapsedTime()  * 2);
-    }
-  }))
+  console.log("king ",king.scene.position)
+  console.log("queen ",queen.scene.position)
 
-  useEffect(() => {
-    if(box && box.current) {
-      box.current.position.y = -1
-    }
-  }, [box])
-
-    const colorMap = useLoader(TextureLoader, pavingStonesPhoto);
-    for(let mesh of test.scene.children) {
-      if(mesh && mesh.material) {
-        mesh.material.map = colorMap;
-      }
-    }
-    console.log(test.nodes)
+  const moveFigure = (figure: Event) => {
+    console.log(figure)
+    figure.eventObject.position.x += 0.35;
+  }
 
     return (<>
-        <primitive ref={box}  object={gltf.scene}>
-            {/* <boxGeometry args={[1,1,1]} />
-            <meshStandardMaterial map={colorMap}/> */}
+        <primitive 
+          onPointerOver={(e: Event) => console.log("MOUSE OVER")}
+          onDrag={(e: Event) => console.log(e)}
+          onClick={(e: Event) => moveFigure(e)}
+          object={queen.scene}>
         </primitive>
-        <primitive object={test.scene}>
-        </primitive>
-        <primitive object={king.scene}>
+        <primitive onClick={(e: Event) => moveFigure(e)} object={king.scene}>
         </primitive>
     </>
     )
