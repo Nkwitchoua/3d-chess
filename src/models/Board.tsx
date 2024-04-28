@@ -15,6 +15,7 @@ const Board = () => {
             {
                 board.cells.map((cellRow, i) => {
                     return cellRow.map((cell, j) => {
+                        
                         return <>{
                             cell.renderCell()
                         }</>

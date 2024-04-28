@@ -9,7 +9,6 @@ interface ClientPos {
 }
 
 const CameraControl = () => {
-//   const [clientPos, setClientPos] = useState<ClientPos>({ x: 0, y: 0 });
   const clientPos = {
     x: 0,
     y: 0
@@ -21,8 +20,8 @@ const CameraControl = () => {
   camera.lookAt(new THREE.Vector3(0,0,0))
   
   window.addEventListener("mousemove", (event) => {
-    clientPos.x = event.clientX / Math.PI;
-    clientPos.y = event.clientY / Math.PI;
+    // clientPos.x = event.clientX / Math.PI;
+    // clientPos.y = event.clientY / Math.PI;
     // setClientPos({x: event.clientX, y: event.clientY });
   });
 
