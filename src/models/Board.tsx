@@ -15,11 +15,20 @@ const Board = () => {
             {
                 board.cells.map((cellRow, i) => {
                     return cellRow.map((cell, j) => {
-                        console.log("CELL -> ", cell.cell);
+                        // console.log("CELL -> ", cell.cell);
                         
                         return <>{
                             cell.renderCell()
                         }</>
+                    })
+                })
+            }
+            {
+                board.figures.map((figuresRow, i) => {
+                    return figuresRow.map((figure, j) => {
+                        if(figure) {
+                            return <>{figure.renderFigure()}</>;
+                        }
                     })
                 })
             }

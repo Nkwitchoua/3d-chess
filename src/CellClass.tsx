@@ -9,20 +9,16 @@ export interface CellProps {
 }
 
 export default class CellClass {
-    i: number;
-    j: number;
     sum: number;
     posX: number;
     posZ: number;
     cell: ReactElement;
 
     constructor(i: number, j: number) {
-        this.i = i;
-        this.j = j;
 
         this.sum = i + j;
-        this.posX = 0 + this.j * 0.35;
-        this.posZ = 0 + this.i * 0.35;
+        this.posX = 0 + i * 0.35;
+        this.posZ = 0 + j * 0.35;
         this.cell = this.sum % 2 == 0 ? 
         <WhiteCell posX={this.posX} posZ={this.posZ} key={this.sum}/> :
         <BlackCell posX={this.posX} posZ={this.posZ} key={this.sum}/>;
