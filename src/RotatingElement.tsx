@@ -14,7 +14,7 @@ const RotatingElement = () => {
   
   const moveFigure = (figure: Event) => {
     console.log(figure)
-    figure.eventObject.position.x += 0.35;
+    // figure.eventObject.position.x += 0.35;
   }
     
     return (<>

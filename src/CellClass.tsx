@@ -9,7 +9,6 @@ export interface CellProps {
 }
 
 export default class CellClass {
-
     i: number;
     j: number;
     sum: number;

@@ -20,15 +20,10 @@ function App() {
     <div id='container' style={{ width: 1280, height: 720 }}>
       <Canvas ref={canvas} id='canvas' >
         <CameraControl/>
-        {/* <perspectiveCamera position={[4, 0.5, 0]} ref={camera}></perspectiveCamera> */}
         <ambientLight intensity={Math.PI / 2}/>
         <directionalLight color={"red"} position={[0,0,3]} />
-        {/* <mesh scale={0.6}>
-          <octahedronGeometry args={[Math.PI / 2]}/>
-          <meshPhongMaterial />
-        </mesh> */}
         <Suspense fallback={"loading"}>
-          <RotatingElement />
+          {/* <RotatingElement /> */}
           <Board/>
         </Suspense>
       </Canvas>

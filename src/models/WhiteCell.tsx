@@ -1,11 +1,12 @@
 import { useLoader, useThree } from '@react-three/fiber'
-import React from 'react'
+import React, { useRef } from 'react'
 import { GLTFLoader, SkeletonUtils } from 'three/examples/jsm/Addons.js'
 import { CellProps } from '../CellClass';
 
 const WhiteCell = ({ posX, posZ }: CellProps) => {
   const cell = useLoader(GLTFLoader, "../../public/models/chess/white_cell.gltf");
   const cellClone = SkeletonUtils.clone(cell.scene);
+  const ref = useRef();
   
   cellClone.position.x = posX;
   cellClone.position.z = -posZ;
@@ -15,7 +16,7 @@ const WhiteCell = ({ posX, posZ }: CellProps) => {
   }
 
   return (
-    <primitive onPointerOver={(e: Event) => handlePointerOver(e)} object={cellClone}></primitive>
+    <primitive ref={ref} onPointerOver={(e: Event) => handlePointerOver(e)} object={cellClone}></primitive>
   )
 }
 
