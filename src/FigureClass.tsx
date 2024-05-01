@@ -17,7 +17,7 @@ export default class FigureClass {
     }
 
     renderFigure(): JSX.Element {
-        console.log("This. figure -> ", this.figure)
+        // console.log("This. figure -> ", this.figure)
         if(this.figure) return this.figure;
 
         return <></>;

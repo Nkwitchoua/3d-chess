@@ -1,13 +1,18 @@
 import { useLoader } from '@react-three/fiber'
-import React from 'react'
-import { GLTFLoader } from 'three/examples/jsm/Addons.js'
+import { GLTFLoader, SkeletonUtils } from 'three/examples/jsm/Addons.js'
+import { FiguresProps } from '../FigureClass';
 
-const Knight = () => {
+const Knight = ({posX, posZ}: FiguresProps) => {
 
-  const figure = useLoader(GLTFLoader, "../../public/models/figures/white_knight.gltf");
+  const white = useLoader(GLTFLoader, "../../public/models/chess/figures/white_knight.gltf");
+
+  const figClone = SkeletonUtils.clone(white.scene);
+  
+  figClone.position.x = posX;
+  figClone.position.z = posZ;
 
   return (
-    <primitive object={figure.scene}></primitive>
+    <primitive object={figClone}></primitive>
   )
 }
 

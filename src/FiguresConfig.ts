@@ -6,7 +6,7 @@ const defaultConfig = [
     [],
     [],
     ["Black_Pawn", "Black_Pawn", "Black_Pawn", "Black_Pawn", "Black_Pawn", "Black_Pawn", "Black_Pawn", "Black_Pawn"],
-    ["Black_Rook", "Black_Knight", "Black_Bishop", "Black_King", "Black_Queen", "Black_Bishop", "Black_Knight", "Black_Rook"]
+    ["Black_Rook", "Black_Knight", "Black_Bishop", "Black_Queen", "Black_King", "Black_Bishop", "Black_Knight", "Black_Rook"]
 ]
 
 export default defaultConfig;

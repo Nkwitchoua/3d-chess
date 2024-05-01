@@ -1,10 +1,13 @@
 import CellClass from "./CellClass";
 import FigureClass from "./FigureClass";
-import Cell from "./models/WhiteCell";
 import defaultConfig from "./FiguresConfig";
-import Pawn from "./models/Pawn";
 import PawnClass from "./figures/PawnClass";
-import Bishop from "./models/Bishop";
+import BishopClass from "./figures/BishopClass";
+import KnightClass from "./figures/KnightClass";
+import RookClass from "./figures/RookClass";
+import QueenClass from "./figures/QueenClass";
+import KingClass from "./figures/KingClass";
+
 
 enum FiguresNames {
     Pawn = "Pawn",
@@ -20,7 +23,12 @@ interface FiguresMap {
 }
 
 const figuresMap: FiguresMap = {
-    Pawn: PawnClass
+    Pawn: PawnClass,
+    Bishop: BishopClass,
+    Knight: KnightClass,
+    Rook: RookClass,
+    Queen: QueenClass,
+    King: KingClass
 }
 
 export default class BoardClass {
@@ -58,6 +66,7 @@ export default class BoardClass {
                 }
             }
         }
+        console.log(this.figures)
     }
 
     renderCells(i: number, j: number) {
