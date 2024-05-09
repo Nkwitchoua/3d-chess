@@ -4,6 +4,7 @@ import RotatingElement from './RotatingElement'
 import CameraControl from './CameraControl'
 import { Vector3 } from 'three';
 import Board from './models/Board';
+
 function App() {
   const canvas = useRef(null);
 

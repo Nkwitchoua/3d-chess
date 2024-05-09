@@ -1,6 +1,10 @@
+import { useLoader } from "@react-three/fiber";
+import { Texture, TextureLoader } from "three";
+
 export interface FiguresProps {
     posX: number;
     posZ: number;
+    colorInt: number;
 }
 
 export default class FigureClass {
@@ -10,14 +14,18 @@ export default class FigureClass {
     colorInt: number = 1;
     posX: number;
     posZ: number;
+    color: string;
 
-    constructor(figureName: string, i: number, j: number) {
+    constructor(figureName: string, i: number, j: number, color: string) {
         this.posX = 0 + i * 0.35;
         this.posZ = 0 + j * 0.35;
+        this.color = color;
+        if(this.color == "black") this.colorInt = -1;
+
     }
 
     renderFigure(): JSX.Element {
-        // console.log("This. figure -> ", this.figure)
+        
         if(this.figure) return this.figure;
 
         return <></>;

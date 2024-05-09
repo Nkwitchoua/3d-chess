@@ -2,12 +2,12 @@ import FigureClass from "../FigureClass";
 import Bishop from "../models/Bishop";
 
 export default class BishopClass extends FigureClass {
-    constructor(figureName: string, i: number, j: number) {
-        super(figureName, i, j);
+    constructor(figureName: string, i: number, j: number, color: string) {
+        super(figureName, i, j, color);
 
         this.moves = this.setFigureMoves();
         
-        this.figure = <Bishop key={Math.random()} posX={this.posX} posZ={this.posZ}/>;
+        this.figure = <Bishop key={Math.random()} posX={this.posX} posZ={this.posZ} texture={this.texture}/>;
     }
 
     setFigureMoves() {

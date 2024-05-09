@@ -19,7 +19,7 @@ enum FiguresNames {
 };
 
 interface FiguresMap {
-    [figureName: string]: new(figureName: string, i: number, j: number) => any;
+    [figureName: string]: new(figureName: string, i: number, j: number, color: string) => any;
 }
 
 const figuresMap: FiguresMap = {
@@ -59,10 +59,10 @@ export default class BoardClass {
             this.figures[i] = [];
             for(let j = 0; j < 8; j++) {
                 if(this.figuresConfig[i][j] && figuresMap[this.figuresConfig[i][j].split("_")[1]]) {
-                    const figureName = this.figuresConfig[i][j].split("_")[1];
-                    this.figures[i][j] = new figuresMap[figureName](figureName, i, j);
-                    // console.log("this.figures[i][j]", this.figures[i][j])
-
+                    const figProps = this.figuresConfig[i][j].split("_");
+                    const figColor = figProps[0];
+                    const figName = figProps[1];
+                    this.figures[i][j] = new figuresMap[figName](figName, i, j, figColor);
                 }
             }
         }

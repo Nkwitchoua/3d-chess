@@ -4,7 +4,7 @@ import { GLTFLoader, SkeletonUtils } from 'three/examples/jsm/Addons.js'
 import { FiguresProps } from '../FigureClass';
 import { Vector3 } from 'three';
 
-const Bishop = ({posX, posZ}: FiguresProps) => {
+const Bishop = ({posX, posZ, texture}: FiguresProps) => {
 
   const white = useLoader(GLTFLoader, "../../public/models/chess/figures/white_bishop.gltf");
 
