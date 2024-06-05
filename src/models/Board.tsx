@@ -13,18 +13,18 @@ const Board = () => {
         fichteNatur: null
     });
 
-    const loadTextures = async() => {
-        const [blackTexture, whiteTexture] = await useLoader(TextureLoader, 
-            ["../public/models/chess/textures/Fichte_dunkel_baseColor.jpeg",
-            "../public/models/chess/textures/Fichte_Natur_baseColor.jpeg"]);
-        return { blackTexture, whiteTexture };
-    }
+    // const loadTextures = async() => {
+    //     const [blackTexture, whiteTexture] = await useLoader(TextureLoader, 
+    //         ["../public/models/chess/textures/Fichte_dunkel_baseColor.jpeg",
+    //         "../public/models/chess/textures/Fichte_Natur_baseColor.jpeg"]);
+    //     return { blackTexture, whiteTexture };
+    // }
     
     const board = new BoardClass();
     const boardObj = useLoader(GLTFLoader, "../public/models/chess/board.gltf");
 
-    const textures = loadTextures();
-    console.log("TEXTUERS ", textures)
+    // const textures = loadTextures();
+    // console.log("TEXTUERS ", textures)
 
   return (
     <>

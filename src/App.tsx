@@ -11,6 +11,7 @@ function App() {
   const canvas = useRef(null);
   const scene = new Scene();
   const skyTexture = useLoader(TextureLoader, "../public/assets/4k-sky-jarxlx0n1mkzmn1j.jpg");
+  const sceneCenter = new Vector3(0, 0, 0);
 
   
   const created = () => {
@@ -20,11 +21,11 @@ function App() {
 
   return (
     <div id='container' style={{ width: "100vw", height: "100vh" }}>
-      <Canvas ref={canvas} id='canvas' onCreated={created}>
+      <Canvas ref={canvas} id='canvas' onCreated={created} shadows>
         <CameraControl/>
         <OrbitControls/>
-        <ambientLight intensity={Math.PI / 2}/>
-        {/* <directionalLight color={"red"} position={[0,0,3]} /> */}
+        <ambientLight castShadow/> 
+        <pointLight position={[0.5,1,1]} intensity={Math.PI / 2} distance={10} castShadow/>
         <Suspense fallback={"loading"}>
           <Board/>
           <primitive attach="background" object={skyTexture}/>

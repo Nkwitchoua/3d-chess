@@ -6,35 +6,19 @@ import { MaterialLoader, TextureLoader } from 'three';
 import * as THREE from "three"
 
 const Pawn = ({posX, posZ, colorInt}: FiguresProps) => {
-
-  console.log("colorInt",colorInt)
-  const normalMap = useLoader(TextureLoader, "../../public/models/chess/textures/Fichte_dunkel_normalMap.jpg")
-  let texture: THREE.Texture;
-  {
-    const black = useLoader(TextureLoader, "../../public/models/chess/textures/Fichte_dunkel_baseColor.jpeg");
-    const white = useLoader(TextureLoader, "../../public/models/chess/textures/Fichte_Natur_baseColor.jpeg");
-
-    colorInt === 1 ? texture = white : texture = black;
-  }
-
+  
+  const blackModel = useLoader(GLTFLoader, "../../public/models/chess/figures/black_pawn.gltf");
   const model = useLoader(GLTFLoader, "../../public/models/chess/figures/white_pawn.gltf");
 
-  const figClone = SkeletonUtils.clone(model.scene);
+  const figClone = colorInt == 1 ? SkeletonUtils.clone(model.scene) : SkeletonUtils.clone(blackModel.scene);
 
-  figClone.traverse(child => {
-    if(child instanceof THREE.Mesh) {
-      console.log("child.material ->", child.material);
-      child.material.map = texture;
-      child.material.normalMap = normalMap
-    }
-  })
+  if(colorInt == -1) console.log("Color int ->", figClone);
   
-  figClone.position.x = posX - 0.35;
+  figClone.position.x = posX;
   figClone.position.z = posZ;
 
   return (
-    <primitive object={figClone}>
-      <pointsMaterial></pointsMaterial>
+    <primitive receiveShadow object={figClone} >
     </primitive>
   )
 }

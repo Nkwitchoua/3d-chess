@@ -7,7 +7,7 @@ export default class RookClass extends FigureClass {
 
         this.moves = this.setFigureMoves();
         
-        this.figure = <Rook key={Math.random()} posX={this.posX} posZ={this.posZ} texture={this.texture}/>;
+        this.figure = <Rook key={Math.random()} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}/>;
     }
 
     setFigureMoves() {
