@@ -7,8 +7,9 @@ import { Vector3 } from 'three';
 const Bishop = ({posX, posZ, colorInt}: FiguresProps) => {
 
   const white = useLoader(GLTFLoader, "../../public/models/chess/figures/white_bishop.gltf");
+  const black = useLoader(GLTFLoader, "../../public/models/chess/figures/black_bishop.gltf");
 
-  const figClone = SkeletonUtils.clone(white.scene);
+  const figClone = colorInt == -1 ? SkeletonUtils.clone(black.scene) : SkeletonUtils.clone(white.scene);
   
   figClone.position.x = posX;
   figClone.position.z = posZ;

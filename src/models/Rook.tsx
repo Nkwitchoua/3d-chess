@@ -7,16 +7,10 @@ import * as THREE from "three"
 
 const Rook = ({posX, posZ, colorInt}: FiguresProps) => {
 
-  const figure = useLoader(GLTFLoader, "../../public/models/chess/figures/white_rook.gltf");
-  const black = useLoader(TextureLoader, "../../public/models/chess/textures/Fichte_dunkel_baseColor.jpeg");
-  const white = useLoader(TextureLoader, "../../public/models/chess/textures/Fichte_Natur_baseColor.jpeg");
+  const white = useLoader(GLTFLoader, "../../public/models/chess/figures/white_rook.gltf");
+  const black = useLoader(GLTFLoader, "../../public/models/chess/figures/black_rook.gltf");
 
-  const figClone = SkeletonUtils.clone(figure.scene);
-  // console.log("figClone", figClone)
-
-  figClone.traverse(child => {
-    // console.log("child ->", child);
-  })
+  const figClone = colorInt == -1 ? SkeletonUtils.clone(black.scene) : SkeletonUtils.clone(white.scene);
   
   figClone.position.x = posX;
   figClone.position.z = posZ;

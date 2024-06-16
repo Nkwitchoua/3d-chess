@@ -7,7 +7,7 @@ export default class KnightClass extends FigureClass {
 
         this.moves = this.setFigureMoves();
         
-        this.figure = <Knight key={Math.random()} posX={this.posX} posZ={this.posZ} texture={this.texture}/>;
+        this.figure = <Knight key={Math.random()} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}/>;
     }
 
     setFigureMoves() {

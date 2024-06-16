@@ -11,7 +11,6 @@ function App() {
   const canvas = useRef(null);
   const scene = new Scene();
   const skyTexture = useLoader(TextureLoader, "../public/assets/4k-sky-jarxlx0n1mkzmn1j.jpg");
-  const sceneCenter = new Vector3(0, 0, 0);
 
   
   const created = () => {
@@ -24,7 +23,9 @@ function App() {
       <Canvas ref={canvas} id='canvas' onCreated={created} shadows>
         <CameraControl/>
         <OrbitControls/>
-        <ambientLight castShadow/> 
+        {/* <ambientLight  />  */}
+        <directionalLight />
+        <spotLight position={[2,2,2]}/>
         <pointLight position={[0.5,1,1]} intensity={Math.PI / 2} distance={10} castShadow/>
         <Suspense fallback={"loading"}>
           <Board/>

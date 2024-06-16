@@ -8,7 +8,7 @@ export default class KingClass extends FigureClass {
 
         this.moves = this.setFigureMoves();
         
-        this.figure = <King key={Math.random()} posX={this.posX} posZ={this.posZ} texture={this.texture}/>;
+        this.figure = <King key={Math.random()} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}/>;
     }
 
     setFigureMoves() {

@@ -16,6 +16,9 @@ const Pawn = ({posX, posZ, colorInt}: FiguresProps) => {
   
   figClone.position.x = posX;
   figClone.position.z = posZ;
+  figClone.traverse(child => {
+    // if(child instanceof THREE.Mesh) child.flatShading = true
+  })
 
   return (
     <primitive receiveShadow object={figClone} >

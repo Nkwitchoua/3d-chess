@@ -7,7 +7,7 @@ export default class QueenClass extends FigureClass {
 
         this.moves = this.setFigureMoves();
         
-        this.figure = <Queen key={Math.random()} posX={this.posX} posZ={this.posZ} texture={this.texture}/>;
+        this.figure = <Queen key={Math.random()} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}/>;
     }
 
     setFigureMoves() {
