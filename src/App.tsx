@@ -25,7 +25,8 @@ function App() {
         <OrbitControls/>
         {/* <ambientLight  />  */}
         <directionalLight />
-        <spotLight position={[2,2,2]}/>
+        <spotLight intensity={Math.PI} position={[2,2,1]}/>
+        <spotLight intensity={Math.PI} position={[2,2,0]}/>
         <pointLight position={[0.5,1,1]} intensity={Math.PI / 2} distance={10} castShadow/>
         <Suspense fallback={"loading"}>
           <Board/>

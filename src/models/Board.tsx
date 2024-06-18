@@ -8,32 +8,30 @@ import { TextureLoader } from 'three';
 
 const Board = () => {
 
-    const [figTextures, setFigTextures] = useState<object>({
-        fichteDunkel: null,
-        fichteNatur: null
-    });
+  const [figTextures, setFigTextures] = useState<object>({
+      fichteDunkel: null,
+      fichteNatur: null
+  });
+  
+  const board = new BoardClass();
+  const boardObj = useLoader(GLTFLoader, "../public/models/chess/board.gltf");
+  
+  const [figures, setFigures] = useState(board.figures);
+  const [cells, setCells] = useState(board.cells);
 
-    // const loadTextures = async() => {
-    //     const [blackTexture, whiteTexture] = await useLoader(TextureLoader, 
-    //         ["../public/models/chess/textures/Fichte_dunkel_baseColor.jpeg",
-    //         "../public/models/chess/textures/Fichte_Natur_baseColor.jpeg"]);
-    //     return { blackTexture, whiteTexture };
-    // }
-    
-    const board = new BoardClass();
-    const boardObj = useLoader(GLTFLoader, "../public/models/chess/board.gltf");
+  const handleFigureClick = (id: string) => {
+    console.log("CLICK!!!", board.figuresObj[id]);
 
-    // const textures = loadTextures();
-    // console.log("TEXTUERS ", textures)
+    board.figuresObj[id].moveFigure()
+  }
 
   return (
     <>
     <Suspense>
 
         <primitive object={boardObj.scene}>
-            {/* <Textures setTextures={setFigTextures}/> */}
             {
-                board.cells.map((cellRow, i) => {
+                cells.map((cellRow, i) => {
                     return cellRow.map((cell, j) => {
                         return <>{
                             cell.renderCell()
@@ -42,8 +40,11 @@ const Board = () => {
                 })
             }
             {
-                board.figures.map((figuresRow, i) => {
+                figures.map((figuresRow, i) => {
+
                     return figuresRow.map((figure, j) => {
+                        figure.setFigure(handleFigureClick);
+
                         if(figure) {
                             return <>{figure.renderFigure()}</>;
                         }

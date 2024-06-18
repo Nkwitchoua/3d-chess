@@ -34,7 +34,9 @@ const figuresMap: FiguresMap = {
 export default class BoardClass {
     cells: CellClass[][];
     figures: FigureClass[][];
+    figuresObj: { [id: string]: FigureClass} = {};
     figuresConfig: string[][] = defaultConfig;
+    selectedFigure: FigureClass | null = null;
 
     constructor() {
         this.cells = [];
@@ -63,18 +65,16 @@ export default class BoardClass {
                     const figColor = figProps[0];
                     const figName = figProps[1];
                     this.figures[i][j] = new figuresMap[figName](figName, i, j, figColor);
+
+                    this.figuresObj[this.figures[i][j].id] = this.figures[i][j];
                 }
             }
         }
-        console.log(this.figures)
+        
     }
 
     renderCells(i: number, j: number) {
         this.cells[i][j].renderCell();
-    }
-
-    renderFigures(i: number, j: number) {
-        
     }
 
     showPossibleMoves() {

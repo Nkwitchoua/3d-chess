@@ -12,10 +12,12 @@ export default class PawnClass extends FigureClass {
         } else {
             this.moves = [[2 * this.colorInt, 0], [1 * this.colorInt, 0]];
         }
-        this.figure = <Pawn key={Math.random()} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}/>;
+        // this.figure = <Pawn key={Math.random()} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}/>;
+
+        console.log("from pawn class", this.id)
     }
 
-    setFigure() {
-
+    setFigure(handleClick: (id: string) => void) {
+        this.figure = <Pawn key={this.id} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt} handleClick={handleClick} figureId={this.id}/>;
     }
 }
