@@ -4,7 +4,7 @@ import { GLTFLoader, SkeletonUtils } from 'three/examples/jsm/Addons.js'
 import { FiguresProps } from '../FigureClass';
 import { Vector3 } from 'three';
 
-const Bishop = ({posX, posZ, colorInt}: FiguresProps) => {
+const Bishop = ({posX, posZ, colorInt, handleClick, figureId}: FiguresProps) => {
 
   const white = useLoader(GLTFLoader, "../../public/models/chess/figures/white_bishop.gltf");
   const black = useLoader(GLTFLoader, "../../public/models/chess/figures/black_bishop.gltf");
@@ -15,7 +15,7 @@ const Bishop = ({posX, posZ, colorInt}: FiguresProps) => {
   figClone.position.z = posZ;
 
   return (
-    <primitive object={figClone}></primitive>
+    <primitive key={"fig#" + figureId} object={figClone}></primitive>
   )
 }
 

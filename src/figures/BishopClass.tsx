@@ -6,8 +6,6 @@ export default class BishopClass extends FigureClass {
         super(figureName, i, j, color);
 
         this.moves = this.setFigureMoves();
-        
-        this.figure = <Bishop key={Math.random()} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}/>;
     }
 
     setFigureMoves() {
@@ -21,5 +19,9 @@ export default class BishopClass extends FigureClass {
             }
         }
         return moves;
+    }
+
+    setFigure(handleClick: (id: string) => void) {
+        this.figure = <Bishop key={this.id} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}  handleClick={handleClick} figureId={this.id}/>;
     }
 }

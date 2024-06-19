@@ -3,7 +3,7 @@ import React from 'react'
 import { GLTFLoader, SkeletonUtils } from 'three/examples/jsm/Addons.js'
 import { FiguresProps } from '../FigureClass';
 
-const Queen = ({posX, posZ, colorInt}: FiguresProps) => {
+const Queen = ({posX, posZ, colorInt, handleClick, figureId}: FiguresProps) => {
 
   const white = useLoader(GLTFLoader, "../../public/models/chess/figures/white_queen.gltf");
   const black = useLoader(GLTFLoader, "../../public/models/chess/figures/black_queen.gltf");
@@ -14,7 +14,7 @@ const Queen = ({posX, posZ, colorInt}: FiguresProps) => {
   figClone.position.z = posZ;
 
   return (
-    <primitive object={figClone}></primitive>
+    <primitive key={"fig#" + figureId} object={figClone}></primitive>
   )
 }
 

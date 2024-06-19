@@ -1,15 +1,17 @@
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader, SkeletonUtils } from 'three/examples/jsm/Addons.js'
 import { FiguresProps } from '../FigureClass';
+import { useRef, useState } from 'react';
 
 const Pawn = ({posX, posZ, colorInt, handleClick, figureId}: FiguresProps) => {
-  
+
+  const ref = useRef();
+  console.log("ref -> ", ref)
+
   const blackModel = useLoader(GLTFLoader, "../../public/models/chess/figures/black_pawn.gltf");
   const model = useLoader(GLTFLoader, "../../public/models/chess/figures/white_pawn.gltf");
 
   const figClone = colorInt == 1 ? SkeletonUtils.clone(model.scene) : SkeletonUtils.clone(blackModel.scene);
-
-  console.log("id", figureId);
 
   // if(colorInt == -1) console.log("Color int ->", figClone);
   
@@ -19,8 +21,12 @@ const Pawn = ({posX, posZ, colorInt, handleClick, figureId}: FiguresProps) => {
     // if(child instanceof THREE.Mesh) child.flatShading = true
   })
 
+  const handleClickMiddleware = () => {
+    handleClick(figureId)
+  }
+
   return (
-    <primitive onClick={() => handleClick(figureId)} receiveShadow object={figClone} >
+    <primitive ref={ref} key={"fig#" + figureId} onClick={() => handleClickMiddleware()} receiveShadow object={figClone} >
     </primitive>
   )
 }

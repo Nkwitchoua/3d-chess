@@ -7,46 +7,46 @@ import Textures from '../Textures.tsx';
 import { TextureLoader } from 'three';
 
 const Board = () => {
-
-  const [figTextures, setFigTextures] = useState<object>({
-      fichteDunkel: null,
-      fichteNatur: null
-  });
-  
-  const board = new BoardClass();
   const boardObj = useLoader(GLTFLoader, "../public/models/chess/board.gltf");
   
-  const [figures, setFigures] = useState(board.figures);
+  const [board, setBoard] = useState(new BoardClass());
+  const [figuresArr, setFiguresArr] = useState(board.figures);
   const [cells, setCells] = useState(board.cells);
 
+  console.log("Board started")
   const handleFigureClick = (id: string) => {
-    console.log("CLICK!!!", board.figuresObj[id]);
 
-    board.figuresObj[id].moveFigure()
+    const figure = board.figuresObj[id];
+    
+    console.log("CLICK!!!", figure);
+
+    figure.moveFigure();
+    // figure.setFigure(handleFigureClick);
+    
+
+    setFiguresArr([...board.figures]);
   }
 
   return (
     <>
     <Suspense>
-
         <primitive object={boardObj.scene}>
             {
                 cells.map((cellRow, i) => {
                     return cellRow.map((cell, j) => {
-                        return <>{
-                            cell.renderCell()
-                        }</>
+                        return cell.renderCell()
                     })
                 })
             }
             {
-                figures.map((figuresRow, i) => {
+                figuresArr.map((figuresRow, i) => {
+                    console.log("MAP START")
 
                     return figuresRow.map((figure, j) => {
                         figure.setFigure(handleFigureClick);
 
                         if(figure) {
-                            return <>{figure.renderFigure()}</>;
+                            return figure.renderFigure();
                         }
                     })
                 })

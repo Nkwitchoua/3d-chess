@@ -8,7 +8,6 @@ export default class KingClass extends FigureClass {
 
         this.moves = this.setFigureMoves();
         
-        this.figure = <King key={Math.random()} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}/>;
     }
 
     setFigureMoves() {
@@ -26,5 +25,9 @@ export default class KingClass extends FigureClass {
                 }
         }
         return moves;
+    }
+
+    setFigure(handleClick: (id: string) => void) {
+        this.figure = <King key={this.id} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt} handleClick={handleClick} figureId={this.id}/>;
     }
 }

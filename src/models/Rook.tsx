@@ -5,7 +5,7 @@ import { FiguresProps } from '../FigureClass';
 import { TextureLoader } from 'three';
 import * as THREE from "three"
 
-const Rook = ({posX, posZ, colorInt}: FiguresProps) => {
+const Rook = ({posX, posZ, colorInt, handleClick, figureId}: FiguresProps) => {
 
   const white = useLoader(GLTFLoader, "../../public/models/chess/figures/white_rook.gltf");
   const black = useLoader(GLTFLoader, "../../public/models/chess/figures/black_rook.gltf");
@@ -16,7 +16,7 @@ const Rook = ({posX, posZ, colorInt}: FiguresProps) => {
   figClone.position.z = posZ;
 
   return (
-    <primitive object={figClone}></primitive>
+    <primitive key={"fig#" + figureId} object={figClone}></primitive>
   )
 }
 

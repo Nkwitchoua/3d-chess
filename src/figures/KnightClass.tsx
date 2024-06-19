@@ -7,7 +7,7 @@ export default class KnightClass extends FigureClass {
 
         this.moves = this.setFigureMoves();
         
-        this.figure = <Knight key={Math.random()} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}/>;
+        
     }
 
     setFigureMoves() {
@@ -23,5 +23,9 @@ export default class KnightClass extends FigureClass {
         moves.push([-1, -2]);
                 
         return moves;
+    }
+
+    setFigure(handleClick: (id: string) => void) {
+        this.figure = <Knight key={this.id} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt} handleClick={handleClick} figureId={this.id}/>;
     }
 }

@@ -6,8 +6,6 @@ export default class RookClass extends FigureClass {
         super(figureName, i, j, color);
 
         this.moves = this.setFigureMoves();
-        
-        this.figure = <Rook key={Math.random()} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt}/>;
     }
 
     setFigureMoves() {
@@ -19,5 +17,9 @@ export default class RookClass extends FigureClass {
                 moves.push([-i, 0]);
         }
         return moves;
+    }
+
+    setFigure(handleClick: (id: string) => void) {
+        this.figure = <Rook key={this.id} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt} handleClick={handleClick} figureId={this.id}/>;
     }
 }

@@ -18,6 +18,7 @@ export default class PawnClass extends FigureClass {
     }
 
     setFigure(handleClick: (id: string) => void) {
+        // console.log(this.id, " ", this.posX, " ", this.posZ, " ", this.colorInt, " ", handleClick, " ");
         this.figure = <Pawn key={this.id} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt} handleClick={handleClick} figureId={this.id}/>;
     }
 }

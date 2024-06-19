@@ -2,6 +2,10 @@ import { useLoader } from "@react-three/fiber";
 import { Texture, TextureLoader } from "three";
 import { generateId } from "./utils";
 
+export enum FigureEnum {
+    step = 0.35,
+}
+
 export interface FiguresProps {
     posX: number;
     posZ: number;
@@ -26,8 +30,6 @@ export default class FigureClass {
         this.color = color;
         this.id = generateId(12);
 
-        console.log(this.id)
-
         if(this.color == "black") this.colorInt = -1;
     }
     
@@ -39,12 +41,11 @@ export default class FigureClass {
     }
     
     moveFigure(): void {
-        console.log("Hello")
         this.hasMoved = true;
-        this.posX += this.moves[0][0];
-        this.posZ += this.moves[0][1];
+        this.posX += 0.35 * this.moves[0][0];
+        this.posZ += 0.35 * this.moves[0][1];
         
-        this.renderFigure();
+        // this.setFigure();
     }
 
     setFigure(handleClick: (id: string) => void): void {}
