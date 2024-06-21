@@ -11,6 +11,7 @@ export interface FiguresProps {
     posZ: number;
     colorInt: number;
     handleClick: (id: string) => void;
+    handleHover: (id: string) => void;
     figureId: string;
 }
 
@@ -48,5 +49,5 @@ export default class FigureClass {
         // this.setFigure();
     }
 
-    setFigure(handleClick: (id: string) => void): void {}
+    setFigure(handleClick: (id: string) => void, handleHover: (id: string) => void): void {}
 }

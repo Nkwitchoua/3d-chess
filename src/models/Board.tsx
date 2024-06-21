@@ -4,10 +4,12 @@ import { GLTFLoader } from 'three/examples/jsm/Addons.js'
 import WhiteCell from './WhiteCell';
 import BoardClass from "../BoardClass.ts";
 import Textures from '../Textures.tsx';
-import { TextureLoader } from 'three';
+import { SphereGeometry, TextureLoader } from 'three';
+import { EffectComposer, Outline, Select, Selection } from '@react-three/postprocessing';
 
 const Board = () => {
   const boardObj = useLoader(GLTFLoader, "../public/models/chess/board.gltf");
+  const [hovered, setHovered] = useState("");
   
   const [board, setBoard] = useState(new BoardClass());
   const [figuresArr, setFiguresArr] = useState(board.figures);
@@ -22,37 +24,49 @@ const Board = () => {
 
     figure.moveFigure();
     // figure.setFigure(handleFigureClick);
-    
 
     setFiguresArr([...board.figures]);
   }
 
+  const handleFigureHover = (id: string) => {
+    setHovered(id);
+    console.log(hovered)
+  }
+
   return (
     <>
-    <Suspense>
-        <primitive object={boardObj.scene}>
-            {
-                cells.map((cellRow, i) => {
-                    return cellRow.map((cell, j) => {
-                        return cell.renderCell()
-                    })
-                })
-            }
-            {
-                figuresArr.map((figuresRow, i) => {
-                    console.log("MAP START")
+        <Suspense>
+            <Selection enabled>
+                <EffectComposer autoClear={false}>
+                    <Outline hiddenEdgeColor={0x000000} edgeStrength={10} visibleEdgeColor={0xffffff}/>
+                </EffectComposer>
 
-                    return figuresRow.map((figure, j) => {
-                        figure.setFigure(handleFigureClick);
-
-                        if(figure) {
-                            return figure.renderFigure();
+                <primitive object={boardObj.scene}>
+                        {
+                            cells.map((cellRow, i) => {
+                                return cellRow.map((cell, j) => {
+                                    return cell.renderCell()
+                                })
+                            })
                         }
-                    })
-                })
-            }
-        </primitive>
-    </Suspense>
+                    {
+                        figuresArr.map((figuresRow, i) => {
+                            console.log("MAP START")
+                            
+                            return figuresRow.map((figure, j) => {
+                                figure.setFigure(handleFigureClick, handleFigureHover);
+                                
+                                if(figure) {
+                                    return <Select key={i*10 + j} enabled={figure.id === hovered}>{
+                                        figure.renderFigure()
+                                    }</Select>
+                                }
+                            })
+                        })
+                    }
+                </primitive>
+            </Selection>
+        </Suspense>
     </>
   )
 }
