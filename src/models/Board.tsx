@@ -22,7 +22,7 @@ const Board = () => {
     
     console.log("CLICK!!!", figure);
 
-    figure.moveFigure();
+    // figure.moveFigure();
     // figure.setFigure(handleFigureClick);
 
     setFiguresArr([...board.figures]);
@@ -30,7 +30,6 @@ const Board = () => {
 
   const handleFigureHover = (id: string) => {
     setHovered(id);
-    console.log(hovered)
   }
 
   return (
@@ -38,17 +37,18 @@ const Board = () => {
         <Suspense>
             <Selection enabled>
                 <EffectComposer autoClear={false}>
-                    <Outline hiddenEdgeColor={0x000000} edgeStrength={10} visibleEdgeColor={0xffffff}/>
+                    <Outline hiddenEdgeColor={0x000000} edgeStrength={100} resolutionScale={1980/720} xRay={false} visibleEdgeColor={0xffffff}/>
+                    
                 </EffectComposer>
 
                 <primitive object={boardObj.scene}>
-                        {
-                            cells.map((cellRow, i) => {
-                                return cellRow.map((cell, j) => {
-                                    return cell.renderCell()
-                                })
+                    {
+                        cells.map((cellRow, i) => {
+                            return cellRow.map((cell, j) => {
+                                return cell.renderCell()
                             })
-                        }
+                        })
+                    }
                     {
                         figuresArr.map((figuresRow, i) => {
                             console.log("MAP START")
@@ -57,7 +57,7 @@ const Board = () => {
                                 figure.setFigure(handleFigureClick, handleFigureHover);
                                 
                                 if(figure) {
-                                    return <Select key={i*10 + j} enabled={figure.id === hovered}>{
+                                    return <Select key={i * 10 + j} enabled={figure.id === hovered}>{
                                         figure.renderFigure()
                                     }</Select>
                                 }

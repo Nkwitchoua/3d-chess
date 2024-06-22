@@ -6,7 +6,6 @@ import { Select } from '@react-three/postprocessing';
 
 const Pawn = ({posX, posZ, colorInt, handleClick, handleHover, figureId}: FiguresProps) => {
   const ref = useRef();
-  const [isHovered, setIsHovered] = useState(false);
 
   const blackModel = useLoader(GLTFLoader, "../../public/models/chess/figures/black_pawn.gltf");
   const model = useLoader(GLTFLoader, "../../public/models/chess/figures/white_pawn.gltf");
