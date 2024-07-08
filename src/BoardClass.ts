@@ -77,7 +77,15 @@ export default class BoardClass {
         this.cells[i][j].renderCell();
     }
 
-    showPossibleMoves() {
-
+    showPossibleMoves(fig: FigureClass) {
+        const moves = fig.moves;
+        console.log("Moves - ", moves);
+        console.log("Position - ",fig.position)
+        for(let i = 0; i < moves.length; i++) {
+            if(this.cells[fig.position[0] + moves[i][0]] && this.cells[fig.position[0] + moves[i][0]][fig.position[1] + moves[i][1]]) {
+                this.cells[fig.position[0] +  + moves[i][0]][fig.position[1] + moves[i][1]].highlightCanMove();
+                this.cells[fig.position[0]][fig.position[1]].highlightCanMove();
+            }
+        }
     }
 }

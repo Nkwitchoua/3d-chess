@@ -1,8 +1,9 @@
 import { extend, useLoader } from '@react-three/fiber'
-import { GLTFLoader, SkeletonUtils } from 'three/examples/jsm/Addons.js'
+import { GLTFLoader, SkeletonUtils } from 'three/examples/jsm/Addons.js';
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+
 import { FiguresProps } from '../FigureClass';
 import { useRef, useState } from 'react';
-import { Select } from '@react-three/postprocessing';
 
 const Pawn = ({posX, posZ, colorInt, handleClick, handleHover, figureId}: FiguresProps) => {
   const ref = useRef();
@@ -19,25 +20,23 @@ const Pawn = ({posX, posZ, colorInt, handleClick, handleHover, figureId}: Figure
 
   const handleClickMiddleware = () => {
     handleClick(figureId)
-    handleHover("")
+    // handleHover("", new Event("click"))
   }
 
-  const handleHoverMiddleware = () => {
-    handleHover(figureId)
-  }
+  // const handleHoverMiddleware = (e) => {
+  //   handleHover(figureId, e)
+  // }
 
   return (
-    // <Select enabled={isHovered}>
       <primitive 
-        onPointerEnter={() => handleHover(figureId)}
-        onPointerOut={() => handleHover("")}
+        onPointerEnter={(e: Event) => handleHover(figureId, e)}
+        onPointerOut={(e: Event) => handleHover("", e)}
         ref={ref} 
         key={"fig#" + figureId} 
         onClick={() => handleClickMiddleware()} 
         receiveShadow 
         object={figClone} >
       </primitive>
-    // </Select>
   )
 }
 

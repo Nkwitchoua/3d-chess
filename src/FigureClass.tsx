@@ -11,7 +11,7 @@ export interface FiguresProps {
     posZ: number;
     colorInt: number;
     handleClick: (id: string) => void;
-    handleHover: (id: string) => void;
+    handleHover: (id: string, e: Event) => void;
     figureId: string;
 }
 
@@ -19,6 +19,7 @@ export default class FigureClass {
     id: string;
     figure: JSX.Element = <></>;
     moves: number[][] = [];
+    position: number[];
     hasMoved: boolean = false;
     colorInt: number = 1;
     posX: number;
@@ -30,6 +31,7 @@ export default class FigureClass {
         this.posZ = 0 + j * 0.35;
         this.color = color;
         this.id = generateId(12);
+        this.position = [i, j];
 
         if(this.color == "black") this.colorInt = -1;
     }
@@ -49,5 +51,5 @@ export default class FigureClass {
         // this.setFigure();
     }
 
-    setFigure(handleClick: (id: string) => void, handleHover: (id: string) => void): void {}
+    setFigure(handleClick: (id: string) => void, handleHover: (id: string, e: Event) => void): void {}
 }

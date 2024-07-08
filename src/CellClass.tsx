@@ -6,6 +6,7 @@ import { generateId } from "./utils";
 export interface CellProps {
     posX: number;
     posZ: number;
+    canMove: boolean;
 }
 
 export default class CellClass {
@@ -18,12 +19,18 @@ export default class CellClass {
     constructor(i: number, j: number) {
         this.id = generateId(24);
         this.sum = i + j;
-        this.posX = 0 + i * 0.35;
-        this.posZ = 0 + j * 0.35;
+        this.posX = i * 0.35;
+        this.posZ = j * 0.35;
 
         this.cell = this.sum % 2 == 0 ? 
-        <WhiteCell posX={this.posX} posZ={this.posZ} key={this.id}/> :
-        <BlackCell posX={this.posX} posZ={this.posZ} key={this.id}/>;
+        <WhiteCell posX={this.posX} posZ={this.posZ} key={this.id} canMove={false}/> :
+        <BlackCell posX={this.posX} posZ={this.posZ} key={this.id} canMove={false}/>;
+    }
+    
+    highlightCanMove() {
+        this.cell = this.sum % 2 == 0 ? 
+        <WhiteCell posX={this.posX} posZ={this.posZ} key={this.id} canMove={true}/> :
+        <BlackCell posX={this.posX} posZ={this.posZ} key={this.id} canMove={true}/>;
     }
     
     renderCell(): JSX.Element {

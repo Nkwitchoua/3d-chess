@@ -16,19 +16,23 @@ const Board = () => {
   const [cells, setCells] = useState(board.cells);
 
   console.log("Board started")
+
   const handleFigureClick = (id: string) => {
 
     const figure = board.figuresObj[id];
     
-    console.log("CLICK!!!", figure);
-
+    console.log("before")
+    board.showPossibleMoves(figure);
+    console.log("after")
+    
     // figure.moveFigure();
     // figure.setFigure(handleFigureClick);
 
-    setFiguresArr([...board.figures]);
+    setCells([...board.cells]);
   }
 
-  const handleFigureHover = (id: string) => {
+  const handleFigureHover = (id: string, e: Event) => {
+    e.stopPropagation();
     setHovered(id);
   }
 
@@ -45,13 +49,13 @@ const Board = () => {
                     {
                         cells.map((cellRow, i) => {
                             return cellRow.map((cell, j) => {
-                                return cell.renderCell()
+                                return cell.renderCell();
                             })
                         })
                     }
                     {
                         figuresArr.map((figuresRow, i) => {
-                            console.log("MAP START")
+                            // console.log("MAP START")
                             
                             return figuresRow.map((figure, j) => {
                                 figure.setFigure(handleFigureClick, handleFigureHover);
