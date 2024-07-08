@@ -1,7 +1,6 @@
 import * as THREE from "three"
 
 const vertexShader = `
-
     varying vec2 vUv;
 
     attribute float a_x1;
@@ -41,9 +40,12 @@ const fragmentShader = `
         float distance = sqrt(pow(0.5 - vUv.x, 2.0) + pow(0.5 - vUv.y, 2.0)) * 1.7;
         float opacity = pow(distance, exp(1.0));
         vec3 color = vec3(0.0, 0.5, 0.8);
+        vec2 colorMax = vec2(1.0, 1.0);
+        vec2 colorMin = vec2(0.0, 0.0);
 
         if(vUv.x < 0.01) {
             opacity = 1.0;
+            
             color = vec3(0.0, 1.0, 1.0);
         }
         if(vUv.y < 0.01) {

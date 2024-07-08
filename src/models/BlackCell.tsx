@@ -12,7 +12,7 @@ const BlackCell = ({ posX, posZ, canMove }: CellProps) => {
   const plane = React.useRef<THREE.Mesh>(null);
   
   cellClone.position.x = posX;
-  cellClone.position.z = -posZ;
+  cellClone.position.z = posZ;
 
   const uniforms = {
     a_x1: { value: 1.0 },
@@ -20,9 +20,6 @@ const BlackCell = ({ posX, posZ, canMove }: CellProps) => {
     a_z1: { value: (-posZ) },
     a_z2: { value: (-posZ - 0.35) }
   };
-  
-  cellClone.position.x = posX;
-  cellClone.position.z = -posZ + 0.35;
 
   useEffect(() => {
     if(plane.current) {
@@ -31,6 +28,9 @@ const BlackCell = ({ posX, posZ, canMove }: CellProps) => {
       plane.current.material.side = THREE.DoubleSide;
       plane.current.rotation.x = Math.PI / 2;
       plane.current.material.transparent = true;
+      plane.current.position.setFromMatrixPosition(cellClone.matrixWorld);
+      plane.current.updateMatrixWorld();
+      plane.current.updateMatrix();
     }
   }, [plane]);
 
@@ -47,7 +47,6 @@ const BlackCell = ({ posX, posZ, canMove }: CellProps) => {
     <mesh 
       visible={canMove}
       ref={plane} 
-      position={new THREE.Vector3(posX - 0.82, 0.06, -posZ + 1.09)}
       scale={new THREE.Vector3(0.35, 0.35, 1)}
       >
       <planeGeometry ></planeGeometry>

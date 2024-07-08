@@ -15,12 +15,14 @@ export default class CellClass {
     posZ: number;
     cell: ReactElement;
     id: string;
+    position: number[];
 
     constructor(i: number, j: number) {
         this.id = generateId(24);
         this.sum = i + j;
         this.posX = i * 0.35;
         this.posZ = j * 0.35;
+        this.position = [i, j];
 
         this.cell = this.sum % 2 == 0 ? 
         <WhiteCell posX={this.posX} posZ={this.posZ} key={this.id} canMove={false}/> :

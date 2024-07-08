@@ -11,15 +11,20 @@ const WhiteCell = ({ posX, posZ, canMove }: CellProps) => {
   const plane = React.useRef<THREE.Mesh>(null);
   const [ highlight, setHighlight ] = useState(false);
   
-  cellClone.position.x = posX;
-  cellClone.position.z = -posZ;
+  cellClone.position.set(posX, 0, posZ);
 
   const uniforms = {
     a_x1: { value: 1.0 },
-    a_x2: { value: (posX + 0.35) },
-    a_z1: { value: (-posZ) },
-    a_z2: { value: (-posZ - 0.35) }
+    a_x2: { value: posX + 0.35 },
+    a_z1: { value: -posZ },
+    a_z2: { value: -posZ - 0.35 }
   };
+
+  if(canMove) {
+    console.log(plane.current?.position)
+    console.log(cellClone.position)
+    cellClone.position.y += 0.5;
+  }
 
   // console.log(" world position ",cellClone.getWorldPosition(new THREE.Vector3()));
   // console.log(" position ", cellClone.position)
@@ -31,8 +36,15 @@ const WhiteCell = ({ posX, posZ, canMove }: CellProps) => {
       plane.current.material.side = THREE.DoubleSide;
       plane.current.rotation.x = Math.PI / 2;
       plane.current.material.transparent = true;
+
+      plane.current.position.set(posX, 0.06, posZ);
+
+      // plane.current.position.x -= 0.82;
+      // plane.current.position.z -= 1.82;
+      plane.current.position.y = 0.06;
       
-      // console.log(" COMPARE -> ", plane.current.scale, " - ", cellClone.scale)
+      console.log(" COMPARE -> ", plane.current.getWorldPosition(new THREE.Vector3), " - ", cellClone.getWorldPosition(new THREE.Vector3()))
+      console.log("PLANE POS - ", cellClone.position)
     }
   }, [plane]);
 
@@ -49,7 +61,7 @@ const WhiteCell = ({ posX, posZ, canMove }: CellProps) => {
       <mesh 
         visible={canMove}
         ref={plane} 
-        position={new THREE.Vector3(posX - 0.82, 0.06, -posZ + 1.09)}
+        // position={new THREE.Vector3(posX, 0.06, posZ)}
         scale={new THREE.Vector3(0.35, 0.35, 1)}
         >
         <planeGeometry ></planeGeometry>
