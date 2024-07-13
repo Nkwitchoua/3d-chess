@@ -82,7 +82,7 @@ export default class BoardClass {
         
         for(let i = 0; i < moves.length; i++) {
             if(this.cells[fig.position[0] + moves[i][0]] && this.cells[fig.position[0] + moves[i][0]][fig.position[1] + moves[i][1]]) {
-                const cell = this.cells[fig.position[0] +  + moves[i][0]][fig.position[1] + moves[i][1]]
+                const cell = this.cells[fig.position[0] + moves[i][0]][fig.position[1] + moves[i][1]]
                 cell.highlightCanMove();
                 console.log("cell position - ", cell.position);
                 console.log("figure position", fig.position);

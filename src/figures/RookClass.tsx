@@ -19,7 +19,7 @@ export default class RookClass extends FigureClass {
         return moves;
     }
 
-    setFigure(handleClick: (id: string) => void) {
-        this.figure = <Rook key={this.id} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt} handleClick={handleClick} figureId={this.id}/>;
+    setFigure(handleClick: (id: string) => void, handleHover: (id: string, e: Event) => void) {
+        this.figure = <Rook key={this.id} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt} handleClick={handleClick} handleHover={handleHover} figureId={this.id}/>;
     }
 }

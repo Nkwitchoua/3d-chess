@@ -3,7 +3,7 @@ import React from 'react'
 import { GLTFLoader, SkeletonUtils } from 'three/examples/jsm/Addons.js'
 import { FiguresProps } from '../FigureClass';
 
-const Queen = ({posX, posZ, colorInt, handleClick, figureId}: FiguresProps) => {
+const Queen = ({posX, posZ, colorInt, handleClick, handleHover, figureId}: FiguresProps) => {
 
   const white = useLoader(GLTFLoader, "../../public/models/chess/figures/white_queen.gltf");
   const black = useLoader(GLTFLoader, "../../public/models/chess/figures/black_queen.gltf");
@@ -13,8 +13,24 @@ const Queen = ({posX, posZ, colorInt, handleClick, figureId}: FiguresProps) => {
   figClone.position.x = posX;
   figClone.position.z = posZ;
 
+  const handleClickMiddleware = () => {
+    handleClick(figureId)
+    // handleHover("", new Event("click"))
+  }
+
+  // const handleHoverMiddleware = (e) => {
+  //   handleHover(figureId, e)
+  // }
+
   return (
-    <primitive key={"fig#" + figureId} object={figClone}></primitive>
+    <primitive 
+      onPointerEnter={(e: Event) => handleHover(figureId, e)}
+      onPointerOut={(e: Event) => handleHover("", e)}
+      key={"fig#" + figureId} 
+      onClick={() => handleClickMiddleware()} 
+      receiveShadow 
+      object={figClone} >
+    </primitive>
   )
 }
 

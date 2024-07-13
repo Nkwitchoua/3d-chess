@@ -15,17 +15,17 @@ export default class QueenClass extends FigureClass {
                 moves.push([0, -i]);
                 moves.push([i, 0]);
                 moves.push([-i, 0]);
-                for(let j = 0; j < 8; ++j) {
-                    moves.push([i, j]);
-                    moves.push([-i, j]);
-                    moves.push([i, -j]);
-                    moves.push([-i, -j]);
-                }
+                // for(let j = 0; j < 8; ++j) {
+                    moves.push([i, i]);
+                    moves.push([-i, i]);
+                    moves.push([i, -i]);
+                    moves.push([-i, -i]);
+                // }
         }
         return moves;
     }
 
-    setFigure(handleClick: (id: string) => void) {
-        this.figure = <Queen key={this.id} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt} handleClick={handleClick} figureId={this.id}/>;
+    setFigure(handleClick: (id: string) => void, handleHover: (id: string, e: Event) => void) {
+        this.figure = <Queen key={this.id} posX={this.posX} posZ={this.posZ} colorInt={this.colorInt} handleClick={handleClick} handleHover={handleHover} figureId={this.id}/>;
     }
 }

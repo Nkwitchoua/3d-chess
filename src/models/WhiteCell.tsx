@@ -9,6 +9,7 @@ const WhiteCell = ({ posX, posZ, canMove }: CellProps) => {
   const cell = useLoader(GLTFLoader, "../../public/models/chess/white_cell.gltf");
   const cellClone = SkeletonUtils.clone(cell.scene);
   const plane = React.useRef<THREE.Mesh>(null);
+  const bloom = React.useRef<THREE.Mesh>(null);
   const [ highlight, setHighlight ] = useState(false);
   
   cellClone.position.set(posX, 0, posZ);
@@ -19,12 +20,6 @@ const WhiteCell = ({ posX, posZ, canMove }: CellProps) => {
     a_z1: { value: -posZ },
     a_z2: { value: -posZ - 0.35 }
   };
-
-  if(canMove) {
-    console.log(plane.current?.position)
-    console.log(cellClone.position)
-    cellClone.position.y += 0.5;
-  }
 
   // console.log(" world position ",cellClone.getWorldPosition(new THREE.Vector3()));
   // console.log(" position ", cellClone.position)
@@ -39,12 +34,16 @@ const WhiteCell = ({ posX, posZ, canMove }: CellProps) => {
 
       plane.current.position.set(posX, 0.06, posZ);
 
-      // plane.current.position.x -= 0.82;
-      // plane.current.position.z -= 1.82;
+      plane.current.position.x -= 0.819;
+      plane.current.position.z -= 1.358;
       plane.current.position.y = 0.06;
-      
-      console.log(" COMPARE -> ", plane.current.getWorldPosition(new THREE.Vector3), " - ", cellClone.getWorldPosition(new THREE.Vector3()))
-      console.log("PLANE POS - ", cellClone.position)
+    }
+    if(bloom.current && plane.current) {
+      const plPos = plane.current.position;
+      const plScale = plane.current.scale;
+      bloom.current.position.set(plPos.x, plPos.y + 0.001, plPos.z);
+      bloom.current.scale.set(plScale.x, plScale.y, plScale.z);
+      bloom.current.rotation.x = Math.PI / 2;
     }
   }, [plane]);
 
@@ -65,6 +64,21 @@ const WhiteCell = ({ posX, posZ, canMove }: CellProps) => {
         scale={new THREE.Vector3(0.35, 0.35, 1)}
         >
         <planeGeometry ></planeGeometry>
+      </mesh>
+      <mesh
+        visible={canMove}
+        ref={bloom}
+        >
+        <planeGeometry ></planeGeometry>
+        <meshStandardMaterial 
+          side={THREE.DoubleSide} 
+          emissive={new THREE.Color(0.0, 0.5, 0.8)} 
+          emissiveIntensity={5} 
+          
+          toneMapped={false}
+          transparent
+          opacity={0.08}
+        />
       </mesh>
     </>
   )

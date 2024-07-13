@@ -5,7 +5,8 @@ import WhiteCell from './WhiteCell';
 import BoardClass from "../BoardClass.ts";
 import Textures from '../Textures.tsx';
 import { SphereGeometry, TextureLoader } from 'three';
-import { EffectComposer, Outline, Select, Selection } from '@react-three/postprocessing';
+import { Bloom, EffectComposer, Outline, Select, Selection } from '@react-three/postprocessing';
+import { BlendFunction, KernelSize } from 'postprocessing';
 
 const Board = () => {
   const boardObj = useLoader(GLTFLoader, "../public/models/chess/board.gltf");
@@ -14,6 +15,10 @@ const Board = () => {
   const [board, setBoard] = useState(new BoardClass());
   const [figuresArr, setFiguresArr] = useState(board.figures);
   const [cells, setCells] = useState(board.cells);
+
+  
+    const intensity = { value: 0.4, min: 0, max: 1.5, step: 0.01 };
+    const levels = { value: 8, min: 1, max: 9, step: 1 }
 
   console.log("Board started")
 
@@ -41,8 +46,15 @@ const Board = () => {
         <Suspense>
             <Selection enabled>
                 <EffectComposer autoClear={false}>
-                    <Outline hiddenEdgeColor={0x000000} edgeStrength={100} resolutionScale={1980/720} xRay={false} visibleEdgeColor={0xffffff}/>
-                    
+                    <Outline hiddenEdgeColor={0x000000} edgeStrength={100} resolutionScale={1980/720} xRay={false} visibleEdgeColor={0xffffff} blur/>
+                    <Bloom 
+                        blurPass={undefined}
+                        kernelSize={KernelSize.LARGE} 
+                        mipmapBlur 
+                        // luminanceThreshold={1} 
+                        levels={4} 
+                        intensity={4} 
+                        blendFunction={BlendFunction.ADD} />
                 </EffectComposer>
 
                 <primitive object={boardObj.scene}>

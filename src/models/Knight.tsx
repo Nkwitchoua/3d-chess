@@ -2,7 +2,7 @@ import { useLoader } from '@react-three/fiber'
 import { GLTFLoader, SkeletonUtils } from 'three/examples/jsm/Addons.js'
 import { FiguresProps } from '../FigureClass';
 
-const Knight = ({posX, posZ, colorInt, handleClick, figureId}: FiguresProps) => {
+const Knight = ({posX, posZ, colorInt, handleClick, handleHover, figureId}: FiguresProps) => {
 
   const white = useLoader(GLTFLoader, "../../public/models/chess/figures/white_knight.gltf");
   const black = useLoader(GLTFLoader, "../../public/models/chess/figures/black_knight.gltf");
@@ -17,7 +17,13 @@ const Knight = ({posX, posZ, colorInt, handleClick, figureId}: FiguresProps) => 
   }
 
   return (
-    <primitive onClick={handleClickMiddleware} key={"fig#" + figureId} object={figClone}></primitive>
+    <primitive 
+      onPointerEnter={(e: Event) => handleHover(figureId, e)}
+      onPointerOut={(e: Event) => handleHover("", e)}
+      onClick={handleClickMiddleware} 
+      key={"fig#" + figureId} 
+      object={figClone}>
+    </primitive>
   )
 }
 

@@ -14,6 +14,8 @@ const vertexShader = `
     varying float v_z2;
 
     void main() {
+
+    
         vUv = uv;
         v_x1 = a_x1;
         v_x2 = a_x2;
@@ -46,24 +48,22 @@ const fragmentShader = `
         if(vUv.x < 0.01) {
             opacity = 1.0;
             
-            color = vec3(0.0, 1.0, 1.0);
+            color = vec3(0.0, 1.0, 1.1);
         }
         if(vUv.y < 0.01) {
             opacity = 1.0;
-            color = vec3(0.0, 1.0, 1.0);
+            color = vec3(0.0, 1.0, 1.1);
         }
 
         if(vUv.x > 0.99) {
             opacity = 1.0;
-            color = vec3(0.0, 1.0, 1.0);
+            color = vec3(0.0, 1.0, 1.1);
         }
         if(vUv.y > 0.99) {
             opacity = 1.0;
-            color = vec3(0.0, 1.0, 1.0);
+            color = vec3(0.0, 1.0, 1.1);
         }
-
-        float x = v_x1;
-        float z = gl_FragCoord.z / 500.0;
+            
         gl_FragColor = vec4(color, opacity);
     }
 `;
